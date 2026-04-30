@@ -1,0 +1,23 @@
+.press-wordmark {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 88%;
+  word-break: keep-all;
+  text-align: center;
+  gap: 0;
+}
+
+.press-chip {
+  padding: 3px 8px;
+}
+
+.press-flag {
+  display: inline-block;
+  color: #d63030;
+  font-size: 0.55em;
+  margin-left: 2px;
+  vertical-align: super;
+  font-style: normal;
+}

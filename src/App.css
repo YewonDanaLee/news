@@ -1,0 +1,43 @@
+.ns-root {
+  min-height: 100vh;
+  background: var(--page);
+  display: flex;
+  justify-content: center;
+}
+
+.ns-canvas {
+  width: 1280px;
+  padding: 0 175px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* header */
+.ns-canvas > :first-child {
+  margin-top: 58px;
+}
+
+/* ticker */
+.ns-ticker-row {
+  margin-top: 40px;
+}
+
+/* tabbar */
+.ns-tabbar-row {
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+/* content + chevrons */
+.ns-content-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ns-list-view {
+  display: flex;
+  flex-direction: column;
+}

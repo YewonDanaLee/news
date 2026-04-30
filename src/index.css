@@ -1,0 +1,29 @@
+:root {
+  --ink: #14212b;
+  --sub: #5f6e76;
+  --mute: #879298;
+  --line: #d2dae0;
+  --soft: #f5f7f9;
+  --card: #ffffff;
+  --page: #fefefe;
+  --accent: #7890e7;
+  --accent-deep: #4362d0;
+  --badge-ink: rgba(255, 255, 255, 0.7);
+
+  --font-sans: 'Pretendard Variable', Pretendard, 'Noto Sans KR', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-serif: 'Noto Serif KR', serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--page);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
