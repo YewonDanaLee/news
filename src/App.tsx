@@ -108,6 +108,7 @@ export default function App() {
   const handleTabChange = (t: 'all' | 'sub') => {
     setTab(t)
     setPage(0)
+    setViewer('grid')
   }
 
   const handleViewerChange = (v: 'grid' | 'list') => {
