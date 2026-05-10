@@ -7,6 +7,7 @@ const app = express()
 const PORT = 3001
 const DATA_PATH = path.join(__dirname, 'data.json')
 const PRESSES_PATH = path.join(__dirname, 'presses.json')
+const ARTICLES_PATH = path.join(__dirname, 'articles.json')
 
 app.use(cors())
 app.use(express.json())
@@ -22,6 +23,14 @@ function writeData(data) {
 // 언론사 목록 조회
 app.get('/api/presses', (_req, res) => {
   res.json(JSON.parse(fs.readFileSync(PRESSES_PATH, 'utf-8')))
+})
+
+// 기사 조회 — pressId 우선, 없으면 category 기본값
+app.get('/api/articles/:pressId', (req, res) => {
+  const { pressId } = req.params
+  const category = req.query.category ?? '종합/경제'
+  const { overrides, defaults } = JSON.parse(fs.readFileSync(ARTICLES_PATH, 'utf-8'))
+  res.json(overrides[pressId] ?? defaults[category] ?? defaults['종합/경제'])
 })
 
 // 구독 목록 조회

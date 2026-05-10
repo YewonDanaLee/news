@@ -3,7 +3,8 @@ import type { Press, CategoryKey } from './types'
 import { CATEGORIES } from './types'
 import { INITIAL_SUBSCRIBED } from './data/presses'
 import { tickerLane1, tickerLane2 } from './data/ticker'
-import { getArticle } from './data/articles'
+import type { ArticleData } from './types'
+
 import Header from './components/Header'
 import Ticker from './components/Ticker'
 import TabBar from './components/TabBar'
@@ -51,8 +52,17 @@ export default function App() {
       .catch(() => {})
   }, [])
 
+  const [article, setArticle] = useState<ArticleData | null>(null)
+
+  useEffect(() => {
+    if (!opened) return
+    fetch(`/api/articles/${opened}?category=${encodeURIComponent(tabKey)}`)
+      .then(r => r.json())
+      .then(setArticle)
+      .catch(() => {})
+  }, [opened, tabKey])
+
   const openedPress = presses.find(p => p.id === opened)
-  const article = getArticle(opened, tabKey)
   const catPresses = pressesByCategory[tabKey] ?? []
   const countInTab = catPresses.length
 
@@ -197,7 +207,7 @@ export default function App() {
             onClick={() => setPage(p => Math.max(0, p - 1))}
           />
 
-          {viewer === 'list' && openedPress ? (
+          {viewer === 'list' && openedPress && article ? (
             <div className="ns-list-view">
               <FieldTab
                 activeTab={tabKey}
