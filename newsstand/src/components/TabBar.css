@@ -1,0 +1,75 @@
+.tabbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 24px;
+}
+
+.tabbar-tabs {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.tabbar-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--mute);
+  letter-spacing: -0.01em;
+}
+
+.tabbar-tab--active {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.tabbar-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--badge-ink);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.tabbar-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--mute);
+}
+
+.toggle-btn--active {
+  color: var(--ink);
+}
+
+.toggle-btn svg {
+  width: 24px;
+  height: 24px;
+}
