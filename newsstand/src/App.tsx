@@ -33,15 +33,21 @@ export default function App() {
     }, {}),
   [presses])
 
-  // 티커 fetch
+  // 티커 fetch — 30초마다 갱신
   useEffect(() => {
-    fetch('/api/ticker')
-      .then(r => r.json())
-      .then(data => {
-        setTickerLane1(data.lane1)
-        setTickerLane2(data.lane2)
-      })
-      .catch(() => {})
+    const fetchTicker = () => {
+      fetch('/api/ticker')
+        .then(r => r.json())
+        .then(data => {
+          setTickerLane1(data.lane1)
+          setTickerLane2(data.lane2)
+        })
+        .catch(() => {})
+    }
+
+    fetchTicker()
+    const id = setInterval(fetchTicker, 30_000)
+    return () => clearInterval(id)
   }, [])
 
   // 언론사 목록 fetch
@@ -185,7 +191,7 @@ export default function App() {
     })
   }, [])
 
-  if (presses.length === 0) {
+  if (presses.length === 0 || tickerLane1.length === 0) {
     return (
       <div className="ns-root">
         <div className="ns-loading">불러오는 중…</div>
