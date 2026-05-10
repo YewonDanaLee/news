@@ -17,6 +17,7 @@ export default function App() {
   const [presses, setPresses] = useState<Press[]>([])
   const [tickerLane1, setTickerLane1] = useState<TickerItem[]>([])
   const [tickerLane2, setTickerLane2] = useState<TickerItem[]>([])
+  const [loadError, setLoadError] = useState(false)
   const [tab, setTab] = useState<'all' | 'sub'>('all')
   const [page, setPage] = useState(0)
   const [viewer, setViewer] = useState<'grid' | 'list'>('grid')
@@ -42,7 +43,7 @@ export default function App() {
           setTickerLane1(data.lane1)
           setTickerLane2(data.lane2)
         })
-        .catch(() => {})
+        .catch(() => setLoadError(true))
     }
 
     fetchTicker()
@@ -59,7 +60,7 @@ export default function App() {
         setOpened(data[0]?.id ?? '')
         setTabKey(data[0]?.category ?? '종합/경제')
       })
-      .catch(() => {})
+      .catch(() => setLoadError(true))
   }, [])
 
   // 구독 목록 fetch
@@ -74,10 +75,14 @@ export default function App() {
 
   useEffect(() => {
     if (!opened) return
-    fetch(`/api/articles/${opened}?category=${encodeURIComponent(tabKey)}`)
+    const controller = new AbortController()
+    fetch(`/api/articles/${opened}?category=${encodeURIComponent(tabKey)}`, {
+      signal: controller.signal,
+    })
       .then(r => r.json())
       .then(setArticle)
       .catch(() => {})
+    return () => controller.abort()
   }, [opened, tabKey])
 
   const openedPress = presses.find(p => p.id === opened)
@@ -190,6 +195,14 @@ export default function App() {
       return next
     })
   }, [])
+
+  if (loadError) {
+    return (
+      <div className="ns-root">
+        <div className="ns-loading">서버에 연결할 수 없습니다. 서버를 실행한 뒤 새로고침하세요.</div>
+      </div>
+    )
+  }
 
   if (presses.length === 0 || tickerLane1.length === 0) {
     return (
