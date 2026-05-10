@@ -8,6 +8,7 @@ const PORT = 3001
 const DATA_PATH = path.join(__dirname, 'data.json')
 const PRESSES_PATH = path.join(__dirname, 'presses.json')
 const ARTICLES_PATH = path.join(__dirname, 'articles.json')
+const TICKER_PATH = path.join(__dirname, 'ticker.json')
 
 app.use(cors())
 app.use(express.json())
@@ -31,6 +32,11 @@ app.get('/api/articles/:pressId', (req, res) => {
   const category = req.query.category ?? '종합/경제'
   const { overrides, defaults } = JSON.parse(fs.readFileSync(ARTICLES_PATH, 'utf-8'))
   res.json(overrides[pressId] ?? defaults[category] ?? defaults['종합/경제'])
+})
+
+// 티커 조회
+app.get('/api/ticker', (_req, res) => {
+  res.json(JSON.parse(fs.readFileSync(TICKER_PATH, 'utf-8')))
 })
 
 // 구독 목록 조회

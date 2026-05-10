@@ -1,17 +1,1 @@
-import type { TickerItem } from '../types'
-
-export const tickerLane1: TickerItem[] = [
-  { press: '연합뉴스', headline: "[속보] 도심 공원 '조용한 독서존' 시범 운영… 시민 호응 잇따라" },
-  { press: '한국경제', headline: '반도체 수출 올해 첫 달 전년 대비 12% 증가… 회복세 뚜렷' },
-  { press: '매일경제', headline: "기준금리 동결 전망 우세… 시장 '안도' 반응" },
-  { press: '연합뉴스', headline: '국내 AI 스타트업 투자 유치 작년 대비 두 배 증가' },
-  { press: '서울경제', headline: '고령화 대응 의료 인프라 확충 예산안 국회 통과' },
-]
-
-export const tickerLane2: TickerItem[] = [
-  { press: '한국경제', headline: '중소기업 ESG 전담 인력 채용 확대… 지속 가능성 주목' },
-  { press: '조선일보', headline: '전국 한파 경보 해제… 이번 주말 기온 회복 예보' },
-  { press: '경향신문', headline: '공공기관 원격근무 제도 확대, 2027년까지 30% 목표' },
-  { press: '한겨레',   headline: '환경부, 1회용 컵 보증금제 전국 확대 시행 발표' },
-  { press: '연합뉴스', headline: '수도권 대중교통 심야버스 노선 10개 추가 운행 결정' },
-]
+// 티커 데이터는 서버 /api/ticker 에서 조회합니다.

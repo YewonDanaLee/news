@@ -2,8 +2,7 @@ import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import type { Press, CategoryKey } from './types'
 import { CATEGORIES } from './types'
 import { INITIAL_SUBSCRIBED } from './data/presses'
-import { tickerLane1, tickerLane2 } from './data/ticker'
-import type { ArticleData } from './types'
+import type { ArticleData, TickerItem } from './types'
 
 import Header from './components/Header'
 import Ticker from './components/Ticker'
@@ -16,6 +15,8 @@ import './App.css'
 
 export default function App() {
   const [presses, setPresses] = useState<Press[]>([])
+  const [tickerLane1, setTickerLane1] = useState<TickerItem[]>([])
+  const [tickerLane2, setTickerLane2] = useState<TickerItem[]>([])
   const [tab, setTab] = useState<'all' | 'sub'>('all')
   const [page, setPage] = useState(0)
   const [viewer, setViewer] = useState<'grid' | 'list'>('grid')
@@ -31,6 +32,17 @@ export default function App() {
       return acc
     }, {}),
   [presses])
+
+  // 티커 fetch
+  useEffect(() => {
+    fetch('/api/ticker')
+      .then(r => r.json())
+      .then(data => {
+        setTickerLane1(data.lane1)
+        setTickerLane2(data.lane2)
+      })
+      .catch(() => {})
+  }, [])
 
   // 언론사 목록 fetch
   useEffect(() => {
