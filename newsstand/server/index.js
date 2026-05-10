@@ -6,6 +6,7 @@ const path = require('path')
 const app = express()
 const PORT = 3001
 const DATA_PATH = path.join(__dirname, 'data.json')
+const PRESSES_PATH = path.join(__dirname, 'presses.json')
 
 app.use(cors())
 app.use(express.json())
@@ -18,8 +19,13 @@ function writeData(data) {
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2))
 }
 
+// 언론사 목록 조회
+app.get('/api/presses', (_req, res) => {
+  res.json(JSON.parse(fs.readFileSync(PRESSES_PATH, 'utf-8')))
+})
+
 // 구독 목록 조회
-app.get('/api/subscriptions', (req, res) => {
+app.get('/api/subscriptions', (_req, res) => {
   res.json(readData())
 })
 
